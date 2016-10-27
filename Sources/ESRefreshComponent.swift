@@ -120,8 +120,13 @@ extension ESRefreshComponent /* KVO methods */ {
     
     fileprivate func removeObserver() {
         if let scrollView = superview as? UIScrollView {
-            scrollView.removeObserver(self, forKeyPath: ESRefreshComponent.offsetKeyPath, context: &ESRefreshComponent.context)
-            scrollView.removeObserver(self, forKeyPath: ESRefreshComponent.contentSizeKeyPath, context: &ESRefreshComponent.context)
+            do {
+                scrollView.removeObserver(self, forKeyPath: ESRefreshComponent.offsetKeyPath, context: &ESRefreshComponent.context)
+                scrollView.removeObserver(self, forKeyPath: ESRefreshComponent.contentSizeKeyPath, context: &ESRefreshComponent.context)
+            }
+            catch {
+                println("BAD STUFF")
+            }
         }
     }
     
